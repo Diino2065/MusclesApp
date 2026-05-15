@@ -12,7 +12,9 @@ data class Users(
     val username: String,
     val password: String,
     val bio: String?= null,
-    val profileImageUri: String?
+    val profileImageUri: String?,
+    val totalTimeSpentSeconds: Long = 0,
+    val lastSessionStart: Long = 0
 ) {
 
 

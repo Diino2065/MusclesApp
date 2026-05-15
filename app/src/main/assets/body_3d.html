@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
+    <title>Human Body</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            width:100vw;
+            height:100vh;
+            overflow:hidden;
+            background:
+                    radial-gradient(circle at top,#23252f 0%,#111319 45%,#07080c 100%);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:Arial,sans-serif;
+        }
+
+        .container{
+            width:100%;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            position:relative;
+        }
+
+        .controls{
+            position:absolute;
+            top:12px;
+            display:flex;
+            gap:10px;
+            z-index:100;
+        }
+
+        .controls button{
+            border:none;
+            padding:10px 18px;
+            border-radius:14px;
+            background:#6366f1;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.2s;
+        }
+
+        .controls button:hover{
+            transform:scale(1.05);
+            background:#7c7ff8;
+        }
+
+        .human{
+            position:relative;
+            width:220px;
+            height:620px;
+            /* make the human element transformable so we can zoom in/out via JS controls */
+            transform-origin: 50% 20px;
+            transition: transform 0.18s ease;
+        }
+
+        .part{
+            position:absolute;
+            border-radius:999px;
+            background:linear-gradient(145deg,#f3d0b5,#d6a98b);
+            box-shadow:
+                    inset -10px -10px 20px rgba(0,0,0,0.22),
+                    inset 10px 10px 18px rgba(255,255,255,0.15),
+                    0 10px 25px rgba(0,0,0,0.35);
+            transition:0.2s;
+        }
+
+        .part:hover{
+            cursor:pointer;
+            filter:brightness(1.1);
+            transform:scale(1.02);
+        }
+
+        .label{
+            position:absolute;
+            top:-32px;
+            left:50%;
+            transform:translateX(-50%);
+            background:rgba(0,0,0,0.8);
+            color:white;
+            padding:6px 10px;
+            border-radius:10px;
+            font-size:12px;
+            opacity:0;
+            white-space:nowrap;
+            pointer-events:none;
+        }
+
+        .part:hover .label{
+            opacity:1;
+        }
+
+        .head{
+            width:92px;
+            height:112px;
+            top:10px;
+            left:64px;
+        }
+
+        .neck{
+            width:34px;
+            height:38px;
+            top:106px;
+            left:93px;
+        }
+
+        .chest{
+            width:150px;
+            height:165px;
+            top:128px;
+            left:35px;
+            border-radius:42px;
+        }
+
+        .back{
+            width:150px;
+            height:165px;
+            top:128px;
+            left:35px;
+            border-radius:42px;
+            background:linear-gradient(145deg,#d9b294,#b78666);
+        }
+
+        .abs{
+            width:108px;
+            height:128px;
+            top:255px;
+            left:56px;
+        }
+
+        .biceps-left,
+        .biceps-right,
+        .triceps-left,
+        .triceps-right{
+            width:42px;
+            height:170px;
+            top:145px;
+        }
+
+        .biceps-left,
+        .triceps-left{
+            left:-2px;
+        }
+
+        .biceps-right,
+        .triceps-right{
+            right:-2px;
+        }
+
+        .quads-left,
+        .quads-right{
+            width:58px;
+            height:220px;
+            top:375px;
+        }
+
+        .quads-left{
+            left:48px;
+        }
+
+        .quads-right{
+            right:48px;
+        }
+        .glutes{
+    width:120px;
+    height:90px;
+    top:330px;
+    left:50px;
+    border-radius:40px;
+    background:linear-gradient(145deg,#d7ae90,#b88361);
+}
+
+.hamstring-left,
+.hamstring-right{
+    width:52px;
+    height:170px;
+    top:390px;
+    border-radius:28px;
+    background:linear-gradient(145deg,#e1b898,#c28d6a);
+}
+
+.hamstring-left{
+    left:50px;
+}
+
+.hamstring-right{
+    right:50px;
+}
+
+        .calf-left,
+        .calf-right{
+            width:48px;
+            height:190px;
+            top:470px;
+            background:linear-gradient(145deg,#e4ba99,#c99776);
+        }
+
+        .calf-left{
+            left:53px;
+        }
+
+        .calf-right{
+            right:53px;
+        }
+
+        .hidden{
+            display:none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="controls">
+        <button onclick="showFront()">Front</button>
+        <button onclick="showBack()">Back</button>
+        <button onclick="zoomOut()">Zoom -</button>
+        <button onclick="resetZoom()">Reset</button>
+        <button onclick="zoomIn()">Zoom +</button>
+    </div>
+
+    <div class="human">
+
+        <!-- FRONT -->
+
+        <div id="frontView">
+
+            <div class="part head"></div>
+
+            <div class="part neck"></div>
+
+            <div class="part chest"
+                 onclick="muscleClick('chest')">
+                <div class="label">Chest</div>
+            </div>
+
+            <div class="part abs"
+                 onclick="muscleClick('abs')">
+                <div class="label">Abs</div>
+            </div>
+
+            <div class="part biceps-left"
+                 onclick="muscleClick('biceps')">
+                <div class="label">Biceps</div>
+            </div>
+
+            <div class="part biceps-right"
+                 onclick="muscleClick('biceps')">
+                <div class="label">Biceps</div>
+            </div>
+
+            <div class="part quads-left"
+                 onclick="muscleClick('quads')">
+                <div class="label">Quads</div>
+            </div>
+
+            <div class="part quads-right"
+                 onclick="muscleClick('quads')">
+                <div class="label">Quads</div>
+            </div>
+
+            <div class="part calf-left"
+                 onclick="muscleClick('calves')">
+                <div class="label">Calves</div>
+            </div>
+
+            <div class="part calf-right"
+                 onclick="muscleClick('calves')">
+                <div class="label">Calves</div>
+            </div>
+
+        </div>
+
+        <!-- BACK -->
+
+        <div id="backView" class="hidden">
+
+            <div class="part head"></div>
+
+            <div class="part neck"></div>
+
+            <div class="part back"
+                 onclick="muscleClick('back')">
+                <div class="label">Back</div>
+            </div>
+
+            <div class="part triceps-left"
+                 onclick="muscleClick('triceps')">
+                <div class="label">Triceps</div>
+            </div>
+
+            <div class="part triceps-right"
+                 onclick="muscleClick('triceps')">
+                <div class="label">Triceps</div>
+            </div>
+            <div class="part hamstring-left"
+                 onclick="muscleClick('hamstrings')">
+                <div class="label">Hamstrings</div>
+            </div>
+
+            <div class="part hamstring-right"
+                 onclick="muscleClick('hamstrings')">
+                <div class="label">Hamstrings</div>
+            </div>
+
+            <div class="part glutes"
+                 onclick="muscleClick('glutes')">
+                <div class="label">Glutes</div>
+            </div>
+
+            <div class="part calf-left"
+                 onclick="muscleClick('calves')">
+                <div class="label">Calves</div>
+            </div>
+
+            <div class="part calf-right"
+                 onclick="muscleClick('calves')">
+                <div class="label">Calves</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function muscleClick(muscle){
+
+        console.log("Clicked:",muscle);
+
+        if(window.Android && Android.onMuscleClicked){
+            Android.onMuscleClicked(muscle);
+        }
+    }
+
+    function showFront(){
+
+        document
+            .getElementById("frontView")
+            .classList
+            .remove("hidden");
+
+        document
+            .getElementById("backView")
+            .classList
+            .add("hidden");
+    }
+
+    function showBack(){
+
+        document
+            .getElementById("backView")
+            .classList
+            .remove("hidden");
+
+        document
+            .getElementById("frontView")
+            .classList
+            .add("hidden");
+    }
+
+    // Simple JS-based zoom controls that scale the .human element so user can zoom fully out/in
+    (function(){
+        var scale = 1.0;
+        var MIN_SCALE = 0.25; // how far user can zoom out
+        var MAX_SCALE = 3.0;  // how far user can zoom in
+
+        window.zoomIn = function(){
+            scale = Math.min(scale + 0.15, MAX_SCALE);
+            applyScale();
+        }
+
+        window.zoomOut = function(){
+            scale = Math.max(scale - 0.15, MIN_SCALE);
+            applyScale();
+        }
+
+        window.resetZoom = function(){
+            scale = 1.0;
+            applyScale();
+        }
+
+        function applyScale(){
+            var el = document.querySelector('.human');
+            if(el) el.style.transform = 'scale(' + scale + ')';
+        }
+
+        // double-tap/double-click resets zoom (useful on desktop)
+        var lastTap = 0;
+        document.querySelector('.human').addEventListener('click', function(e){
+            var current = Date.now();
+            if(current - lastTap < 300){
+                resetZoom();
+            }
+            lastTap = current;
+        });
+    })();
+
+</script>
+
+</body>
+</html>

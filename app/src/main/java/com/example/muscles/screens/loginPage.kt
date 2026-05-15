@@ -1,11 +1,13 @@
 package com.example.muscles.screens
 import android.app.Application
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -24,130 +26,160 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.muscles.RoomDb.UserViewModel
-import com.example.muscles.RoomDb.Users
+import com.example.muscles.ui.theme.DarkBackground
+import com.example.muscles.ui.theme.DarkPrimary
+import com.example.muscles.ui.theme.DarkOnBackground
+import coil.compose.rememberAsyncImagePainter
 
 
 @Composable
-fun loginPage(navController: NavController,userViewModel: UserViewModel): Unit {
-
+fun LoginPage(navController: NavController, userViewModel: UserViewModel) {
 
     val context = LocalContext.current
-    val userViewModel: UserViewModel = viewModel(
+    val viewModel: UserViewModel = viewModel(
         factory = ViewModelProvider.AndroidViewModelFactory(context.applicationContext as Application)
     )
 
-var userName by remember { mutableStateOf("") }
-
-var password by remember { mutableStateOf("") }
+    var userName by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }
 
-
-Card (modifier = Modifier.fillMaxSize(),
-    colors = CardDefaults.cardColors(
-        containerColor = Color(0xFF2A3D45)
-    )){
-
-    Column (modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top){
-
-        Text(text= "Muscles",
-            modifier = Modifier.padding(top = 80.dp, bottom = 30.dp), color = Color(0xffFFFFFF),
-            fontSize = 60.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Serif
-        )
-
-        Text(text="You can never know enough about the human body",
-          modifier = Modifier.padding(30.dp), color = Color(0xFF949494) ,
-            fontSize = 20.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Thin,
-            fontFamily = FontFamily.Serif, textAlign = TextAlign.Center
-
-        )
-
-        TextField(modifier = Modifier.padding(top = 45.dp, bottom = 20.dp),
-            value = userName,
-            onValueChange = {userName= it},
-            label = {Text("Username:", modifier = Modifier
-                .width(300.dp)
-                .height(20.dp),
-
-            )}
-        )
-
-
-        TextField(modifier = Modifier.padding(top = 45.dp, bottom = 20.dp),
-            value = password,
-            onValueChange = {password= it},
-            label = {Text("Password:", modifier = Modifier
-                .width(300.dp)
-                .height(20.dp),
-                ) },
-            visualTransformation = PasswordVisualTransformation()
-
-        )
-        if(errorMessage.isNotEmpty())
-        {
-            Text(
-            text=errorMessage,
-            color=Color.Red,
-                modifier = Modifier.padding(6.dp)
-            )
-        }
-
-        Button(
-            onClick = {
-                if (userName.isNotEmpty() && password.isNotEmpty()) {
-                    userViewModel.loginUser(userName, password) { user ->
-                        if (user != null) {
-                            navController.navigate("HomePage/$userName")
-                        } else {
-                            errorMessage = "Invalid username or password!"
-                        }
-                    }
-                } else {
-                    errorMessage = "All fields must be filled!"
-                }
-            },
-
-
-            modifier = Modifier
-                .padding(top = 40.dp)
-                .width(240.dp)
-                .height(50.dp),
-            colors =ButtonDefaults.buttonColors(containerColor = Color(0xFF949494)),
-            shape = RoundedCornerShape(20.dp),
-
-
-        ) {
-            Text(text= "Login", modifier = Modifier.padding(6.dp),
-                fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic
-
-
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(DarkBackground, Color(0xFF1A1F3A))
                 )
-
-
-
-
-        }
-        Text(
-            text= "Dont have an account? Register here ",
+            )
+    ) {
+        Column(
             modifier = Modifier
-                .padding(top = 16.dp)
-                .clickable {
-                    navController.navigate("registerPage")
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Muscles",
+                modifier = Modifier.padding(bottom = 12.dp),
+                color = Color.White,
+                fontSize = 52.sp,
+                fontStyle = FontStyle.Italic,
+                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily.Serif
+            )
+
+            Text(
+                text = "You can never know enough about the human body !",
+                modifier = Modifier.padding(bottom = 48.dp),
+                color = DarkOnBackground,
+                fontSize = 16.sp,
+                fontStyle = FontStyle.Italic,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                value = userName,
+                onValueChange = { userName = it },
+                label = { Text("Username") },
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = DarkPrimary,
+                    unfocusedBorderColor = Color(0xFF404060),
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White,
+                    focusedLabelColor = DarkPrimary,
+                    unfocusedLabelColor = Color(0xFFB0B0C0),
+                    cursorColor = DarkPrimary
+                ),
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 24.dp),
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Password") },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = DarkPrimary,
+                    unfocusedBorderColor = Color(0xFF404060),
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White,
+                    focusedLabelColor = DarkPrimary,
+                    unfocusedLabelColor = Color(0xFFB0B0C0),
+                    cursorColor = DarkPrimary
+                ),
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            if (errorMessage.isNotEmpty()) {
+                Text(
+                    text = errorMessage,
+                    color = Color(0xFFFF6B6B),
+                    modifier = Modifier.padding(bottom = 12.dp),
+                    fontSize = 13.sp
+                )
+            }
+
+            Button(
+                onClick = {
+                    if (userName.isNotEmpty() && password.isNotEmpty()) {
+                        userViewModel.loginUser(userName, password) { user ->
+                            if (user != null) {
+                                navController.navigate("HomePage/$userName")
+                            } else {
+                                errorMessage = "Invalid username or password"
+                            }
+                        }
+                    } else {
+                        errorMessage = "Please fill in all fields"
+                    }
                 },
-            color = Color.White,
-            fontSize = 16.sp,
-            fontStyle = FontStyle.Italic,
-            textAlign = TextAlign.Center
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp)
+                    .padding(bottom = 16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = DarkPrimary),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = "Login",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    color = Color.White
+                )
+            }
 
-
-        )
-
-
-}//column
-
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Don't have an account? ",
+                    color = Color(0xFFB0B0C0),
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "Register",
+                    modifier = Modifier.clickable {
+                        navController.navigate("registerPage")
+                    },
+                    color = DarkPrimary,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
 }
-}//card
-
 

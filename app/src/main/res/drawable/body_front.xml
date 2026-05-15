@@ -1,0 +1,51 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="600dp"
+    android:viewportWidth="300"
+    android:viewportHeight="600">
+
+
+    <path
+        android:name="head"
+        android:fillColor="#E0B89C"
+        android:pathData="M150,40 a30,30 0 1,1 0,60 a30,30 0 1,1 0,-60"/>
+
+
+    <path
+        android:name="chest"
+        android:fillColor="#E0B89C"
+        android:pathData="M90,100 C110,80 190,80 210,100 L200,180 C170,200 130,200 100,180 Z"/>
+
+
+    <path
+        android:name="abs"
+        android:fillColor="#D9A989"
+        android:pathData="M110,180 L190,180 L180,260 L120,260 Z"/>
+
+
+    <path
+        android:name="left_arm"
+        android:fillColor="#E0B89C"
+        android:pathData="M70,120 L100,120 L95,260 L65,260 Z"/>
+
+    <path
+        android:name="right_arm"
+        android:fillColor="#E0B89C"
+        android:pathData="M200,120 L230,120 L235,260 L205,260 Z"/>
+
+    <path
+        android:name="left_leg"
+        android:fillColor="#E0B89C"
+        android:pathData="M120,260 L150,260 L145,500 L115,500 Z"/>
+
+
+    <path
+        android:name="right_leg"
+        android:fillColor="#E0B89C"
+        android:pathData="M150,260 L180,260 L185,500 L155,500 Z"/>
+
+    <path
+        android:fillColor="#D9A989"
+        android:pathData="M70,100 C110,70 190,70 230,100 L210,130 C170,115 130,115 90,130 Z"/>
+
+</vector>

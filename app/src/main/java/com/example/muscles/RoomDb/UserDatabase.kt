@@ -6,8 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.muscles.RoomDb.UserDao
 import com.example.muscles.RoomDb.Users
+import com.example.muscles.RoomDb.MuscleSearch
+import com.example.muscles.RoomDb.WaterIntake
 
-@Database(entities = [Users::class], version = 2)
+@Database(entities = [Users::class, MuscleSearch::class, WaterIntake::class], version = 4)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
