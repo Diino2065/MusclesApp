@@ -378,7 +378,7 @@
             .add("hidden");
     }
 
-    // Simple JS-based zoom controls that scale the .human element so user can zoom fully out/in
+
     (function(){
         var scale = 1.0;
         var MIN_SCALE = 0.25; // how far user can zoom out
@@ -404,7 +404,7 @@
             if(el) el.style.transform = 'scale(' + scale + ')';
         }
 
-        // double-tap/double-click resets zoom (useful on desktop)
+
         var lastTap = 0;
         document.querySelector('.human').addEventListener('click', function(e){
             var current = Date.now();
