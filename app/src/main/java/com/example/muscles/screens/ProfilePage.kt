@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -64,6 +65,9 @@ import com.example.muscles.ui.theme.LightBackground
 import com.example.muscles.ui.theme.LightOnBackground
 import com.example.muscles.ui.theme.LightPrimary
 import com.example.muscles.ui.theme.LightSurface
+import com.example.muscles.ui.theme.futuristicBackgroundBrush
+import com.example.muscles.ui.theme.futuristicButtonColors
+import com.example.muscles.ui.theme.futuristicCardColors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -98,10 +102,10 @@ fun ProfilePage(
     }
 
     Card(
-        modifier = Modifier.fillMaxSize(),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDarkMode) DarkBackground else LightBackground
-        )
+        modifier = Modifier
+            .fillMaxSize()
+            .background(futuristicBackgroundBrush(isDarkMode)),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -136,6 +140,13 @@ fun ProfilePage(
                     onClick = {
                         menuExpanded = false
                         navController.navigate("ProfilePage/$username")
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("Exercise") },
+                    onClick = {
+                        menuExpanded = false
+                        navController.navigate("Exercise/$username")
                     }
                 )
             }
@@ -225,11 +236,9 @@ fun ProfilePage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (isDarkMode) DarkSurface else LightSurface
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    shape = RoundedCornerShape(24.dp),
+                    colors = futuristicCardColors(isDarkMode),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
@@ -367,7 +376,6 @@ fun ProfilePage(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 20.dp)
-
                         .navigationBarsPadding()
                         .padding(bottom = 8.dp),
                     horizontalArrangement = Arrangement.Center
@@ -377,10 +385,8 @@ fun ProfilePage(
                         modifier = Modifier
                             .width(110.dp)
                             .padding(end = 5.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (isDarkMode) DarkPrimary else LightPrimary
-                        ),
-                        shape = RoundedCornerShape(20.dp)
+                        colors = futuristicButtonColors(if (isDarkMode) DarkPrimary else LightPrimary),
+                        shape = RoundedCornerShape(22.dp)
                     ) {
                         Text(
                             text = "Stats",
@@ -397,10 +403,8 @@ fun ProfilePage(
                         modifier = Modifier
                             .width(110.dp)
                             .padding(start = 5.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (isDarkMode) DarkTertiary else LightPrimary
-                        ),
-                        shape = RoundedCornerShape(20.dp)
+                        colors = futuristicButtonColors(if (isDarkMode) DarkTertiary else LightPrimary),
+                        shape = RoundedCornerShape(22.dp)
                     ) {
                         Text(
                             text = "Close",

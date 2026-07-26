@@ -13,22 +13,36 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkPrimary,
+    onPrimary = Color.White,
     secondary = DarkSecondary,
+    onSecondary = Color.Black,
     tertiary = DarkTertiary,
+    onTertiary = Color.Black,
     background = DarkBackground,
-    surface = DarkSurface,
     onBackground = DarkOnBackground,
-    onSurface = DarkOnSurface
+    surface = DarkSurface,
+    onSurface = DarkOnSurface,
+    error = DarkErrorRed,
+    onError = Color.Black,
+    surfaceVariant = Color(0xFF2D3142),
+    outlineVariant = Color(0xFF49454E)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = LightPrimary,
-    secondary = LightSecondary,
-    tertiary = LightTertiary,
+    primary = DarkPrimary,  // Keep vibrant primary even in light mode
+    onPrimary = Color.White,
+    secondary = DarkSecondary,
+    onSecondary = Color.White,
+    tertiary = Color(0xFF5A4A8A),
+    onTertiary = Color.White,
     background = LightBackground,
-    surface = LightSurface,
     onBackground = LightOnBackground,
-    onSurface = LightOnSurface
+    surface = LightSurface,
+    onSurface = LightOnSurface,
+    error = LightErrorRed,
+    onError = Color.White,
+    surfaceVariant = Color(0xFFF5F5F5),
+    outlineVariant = Color(0xFFCAC4D0)
 )
 
 @Composable

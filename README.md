@@ -1,8 +1,106 @@
-<img width="1870" height="1021" alt="image" src="https://github.com/user-attachments/assets/758d82df-4302-4c29-bdb8-0232b1a2607c" />
+# 💪 Muscles - Fitness & Health Companion
 
-Preview Muscles aplikacije koja za zadatak ima da prikazuje misice tijela i podatke o istima (in progress) 
-Profile Page prikazuje podatke korisnika sa njegovim bio kao i mogucnost dodavanja profile picture (Done) 
-Login i register povezani sa Room database (Done) 
-Stats Page prikazuje statistiku koristenja aplikacije odnoso broj sati (in progress) 
-Home page omogucava pretrazivanje i filtriranje search opcija (JSON type podaci ide nakon dodavanja podataka) 
+
+
+## 📱 Što je Muscles?
+
+**Muscles** je moderna Android aplikacija koja vam pomaže da:
+- 🏋️ Objekt sve mišiće u vašem tijelu i njihove funkcije
+- 📊 Pratite svoju BMI vrijednost
+- 💧 Vodite dnevnik unosa vode
+- ⏱️ Pratite vrijeme provedeno u treningu
+- 🎯 Dobijate savjete o zdravlju i ishrani
+
+## 🚀 Počni sa Muscles-om
+
+### Instalacija
+1. Preuzmite aplikaciju na svoj Android telefon
+2. Kreirajte račun sa vašim korisničkim imenom i lozinkom
+3. Ulogujte se i počnite sa treningom!
+
+### Osnovna Upotreba
+
+#### 🏃 Home Page
+- **3D Model** - Interaktivni prikaz čovjeka. Kliknite na mišić da vidite detaljne informacije
+- **BMI Calculator** - Izračunajte vašu BMI vrijednost unošenjem visine i težine
+- **Water Intake** - Unesite koliko ste vode popili dnevno (litre)
+- **Search** - Pretražujte mišiće po imenu
+- **Health Tips** - Kliknite na zvonac za nasumične zdravstvene savjete
+
+#### 📊 Stats Page
+- Pregledajte koliko ste vremena proveli u aplikaciji
+- Vidite historiju unosa vode
+- Pratite najčešće pretraživane mišiće
+
+#### 👤 Profile Page
+- Ažurirajte vašu profilnu sliku
+- Promijenite informacije (ime, email, bio)
+- Kliknite "Save" da sačuvate promjene
+
+### 💡 Savjeti za Korištenje
+
+✅ **Pij redovito vodu** - Unesi dnevno koliko vode piješ za tracking
+✅ **Provjeri sve mišiće** - Koristi 3D model da naučiš gdje se nalazi svaki mišić
+✅ **Redovno trenuj** - Vrati se u aplikaciju da vidish napredak u vremenu
+✅ **Procitaj zdravstvene savjete** - Kliknite na zvonac za motivacijske savjete
+
+## 🌙 Dark Mode i Light Mode
+
+Kliknite na sunce (☀️) u gornjem lijevom kutu za promjenu između dark i light moda.
+
+## 📋 Mišići u Bazi Podataka
+
+Aplikacija ima informacije o 9 glavnih mišića:
+- 💪 Biceps Brachii
+- 🤸 Triceps Brachii
+- 🏋️ Pectoralis Major (prsni mišić)
+- 🦵 Quadriceps
+- 🔙 Latissimus Dorsi (leđa)
+- 🍑 Gluteus Maximus (stražnji)
+- 🦴 Hamstrings
+- 🦵 Gastrocnemius (list)
+- 🫀 Rectus Abdominis (trbušnjaci)
+
+## 🎥 Vježbe sa GIF-ovima
+
+Svaki mišić ima detaljne GIF animacije koja pokazuje kako izvršiti vježbe:
+- Pravilnu tehniku
+- Pokrety
+- Aktivaciju mišića
+
+## 🔐 Privatnost i Sigurnost
+
+- Vaš račun je zaštićen lozinkom
+- Svi podaci se čuvaju na vašem telefonu
+- Nikad nismo dijelimo vašu ličnu informaciju
+
+## ❓ Često Postavljana Pitanja (FAQ)
+
+**P: Kako mogu resetovati moj račun?**
+A: Trebate da obrišete aplikaciju i ponovo je instalirate (svi podaci će biti obrisani).
+
+**P: Što ako 3D model ne učita?**
+A: Aplikacija će automatski prebaciti na BMI kalkulator. Pokušajte ponovo ili proverite konekciju.
+
+**P: Gdje se čuvaju moji podaci?**
+A: Svi podaci se čuvaju lokalno na vašem telefonu u bazi podataka.
+
+**P: Mogu li vidjeti moj napredak?**
+A: Da! Idite na Stats stranicu da vidite vrijeme provedeno i historiju vode.
+
+## 📞 Podrška
+
+Imali ste problema? Kontaktirajte nas ili pokušajte:
+1. Obrisati cache aplikacije
+2. Ponovno pokrenuti aplikaciju
+3. Ažurirati na najnoviju verziju
+
+## 📚 Verzija
+
+**Navedena verzija**: 1.0
+**Zadnja ažuriranja**: Maj 2026
+
+---
+
+**Uživaj u Muscles-u i budi fit! 💪**
 

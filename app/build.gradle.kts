@@ -76,6 +76,15 @@ dependencies {
     implementation(libs.sceneview)
 
     implementation("io.coil-kt:coil-gif:2.6.0")
-
+    
+    // Security & Hashing
+    implementation("at.favre.lib:bcrypt:0.9.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    
+    // Validation
+    implementation("androidx.compose.material:material:1.5.4")
+    
+    // Logging
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
 }

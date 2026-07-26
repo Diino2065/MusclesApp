@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.muscles.RoomDb.UserViewModel
+import com.example.muscles.screens.ExercisePage
 import com.example.muscles.screens.HomePage
 import com.example.muscles.screens.LoginPage
 import com.example.muscles.screens.ProfilePage
@@ -120,6 +121,15 @@ fun Navigation(
                 navController = navController,
                 username = username,
                 userViewModel = userViewModel,
+                isDarkMode = isDarkMode
+            )
+        }
+        composable("Exercise/{username}") { backStackEntry ->
+            val username = backStackEntry.arguments?.getString("username").orEmpty()
+            if (username.isNotBlank()) onUsernameActive(username)
+            ExercisePage(
+                navController = navController,
+                username = username,
                 isDarkMode = isDarkMode
             )
         }

@@ -43,6 +43,10 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.example.muscles.R
 import com.example.muscles.ui.theme.DarkSurface
+import com.example.muscles.ui.theme.futuristicBackgroundBrush
+import com.example.muscles.ui.theme.futuristicButtonColors
+import com.example.muscles.ui.theme.futuristicCardColors
+import com.example.muscles.ui.theme.futuristicTextFieldColors
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
@@ -282,9 +286,11 @@ fun HomePage(
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(futuristicBackgroundBrush(isDarkMode)),
         //scaffold koristi boju pozadine iz teme da modovi rade kako treba da ne bzude bugova
-        containerColor = colors.background
+        containerColor = Color.Transparent
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -376,7 +382,7 @@ fun HomePage(
                         modelLoadFailed = false
                     },
                     modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.buttonColors(colors.primary)
+                    colors = futuristicButtonColors(colors.primary)
                 ) {
                     Text("3D Model")
                 }
@@ -389,6 +395,14 @@ fun HomePage(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("BMI Calculator")
+                }
+
+                Button(
+                    onClick = { navController.navigate("Exercise/$username") },
+                    modifier = Modifier.weight(1f),
+                    colors = futuristicButtonColors(colors.primary)
+                ) {
+                    Text("Workout")
                 }
             }
 
@@ -405,9 +419,9 @@ fun HomePage(
 
             Card(
                 modifier = Modifier.fillMaxWidth().height(520.dp),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(colors.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+                shape = RoundedCornerShape(28.dp),
+                colors = CardDefaults.cardColors(colors.surface.copy(alpha = 0.92f)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 14.dp)
             ) {
 
                 val show3D = use3DModel && !modelLoadFailed
@@ -439,6 +453,7 @@ fun HomePage(
                             heightText = bmiHeightCm,
                             weightText = bmiWeightKg,
                             bmiResult = bmiResult,
+                            isDarkMode = isDarkMode,
                             onHeightChange = {
                                 bmiHeightCm = it
                                 bmiResult = null
@@ -474,9 +489,9 @@ fun HomePage(
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(colors.surface),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                shape = RoundedCornerShape(28.dp),
+                colors = CardDefaults.cardColors(colors.surface.copy(alpha = 0.92f)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 14.dp)
             ) {
                 Column(
                     modifier = Modifier
@@ -503,6 +518,7 @@ fun HomePage(
                             modifier = Modifier.weight(1f),
                             label = { Text("Liters") },
                             singleLine = true,
+                            colors = futuristicTextFieldColors(isDarkMode, colors.primary),
                             keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
                                 keyboardType = androidx.compose.ui.text.input.KeyboardType.Decimal
                             )
@@ -521,7 +537,7 @@ fun HomePage(
                                 }
                             },
                             modifier = Modifier.height(56.dp),
-                            colors = ButtonDefaults.buttonColors(colors.primary)
+                            colors = futuristicButtonColors(colors.primary)
                         ) {
                             Text("Save")
                         }
@@ -540,7 +556,7 @@ fun HomePage(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colors.surfaceVariant.copy(alpha = 0.9f), RoundedCornerShape(18.dp))
+                        .background(colors.surfaceVariant.copy(alpha = 0.9f), RoundedCornerShape(24.dp))
                         .padding(16.dp)
                 ) {
                     Text(
@@ -660,6 +676,7 @@ fun BMICalculatorCard(
     heightText: String,
     weightText: String,
     bmiResult: String?,
+    isDarkMode: Boolean = true,
     onHeightChange: (String) -> Unit,
     onWeightChange: (String) -> Unit,
     onCalculate: () -> Unit
@@ -674,7 +691,7 @@ fun BMICalculatorCard(
     ) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(28.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color.Transparent
                 ),
@@ -703,7 +720,8 @@ fun BMICalculatorCard(
                     onValueChange = onHeightChange,
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text("Visina (cm)") },
-                    singleLine = true
+                    singleLine = true,
+                    colors = futuristicTextFieldColors(isDarkMode, colors.primary)
                 )
 
                 OutlinedTextField(
@@ -711,13 +729,14 @@ fun BMICalculatorCard(
                     onValueChange = onWeightChange,
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text("Težina (kg)") },
-                    singleLine = true
+                    singleLine = true,
+                    colors = futuristicTextFieldColors(isDarkMode, colors.primary)
                 )
 
                 Button(
                     onClick = onCalculate,
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = colors.primary)
+                    colors = futuristicButtonColors(colors.primary)
                 ) {
                     Text("Calculate BMI")
                 }
@@ -909,13 +928,13 @@ fun ExerciseCard(exercise: Exercise, imageLoader: ImageLoader, colors: ColorSche
     var triedAlternate by remember { mutableStateOf(false) }
     var showPlaceholder by remember { mutableStateOf(false) }
 
-            Card(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 12.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = DarkSurface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = DarkSurface.copy(alpha = 0.92f)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
@@ -932,7 +951,7 @@ fun ExerciseCard(exercise: Exercise, imageLoader: ImageLoader, colors: ColorSche
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(16f / 9f)
-                    .background(colors.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(12.dp)),
+                    .background(colors.surfaceVariant.copy(alpha = 0.5f), RoundedCornerShape(18.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 val model = remember(reloadKey, currentUrl) {
@@ -949,7 +968,7 @@ fun ExerciseCard(exercise: Exercise, imageLoader: ImageLoader, colors: ColorSche
                     imageLoader = imageLoader,
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(12.dp)),
+                        .clip(RoundedCornerShape(18.dp)),
 
                     contentScale = ContentScale.Fit,
                     loading = {
@@ -983,7 +1002,7 @@ fun ExerciseCard(exercise: Exercise, imageLoader: ImageLoader, colors: ColorSche
                                     showPlaceholder = false
                                     currentUrl = exercise.gif
                                     reloadKey++
-                                }) {
+                                }, colors = ButtonDefaults.buttonColors(containerColor = colors.primary)) {
                                     Text("Retry")
                                 }
                             }

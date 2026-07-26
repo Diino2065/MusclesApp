@@ -1,6 +1,7 @@
 package com.example.muscles.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,6 +47,9 @@ import com.example.muscles.ui.theme.LightBackground
 import com.example.muscles.ui.theme.LightOnBackground
 import com.example.muscles.ui.theme.LightPrimary
 import com.example.muscles.ui.theme.LightSurface
+import com.example.muscles.ui.theme.futuristicBackgroundBrush
+import com.example.muscles.ui.theme.futuristicButtonColors
+import com.example.muscles.ui.theme.futuristicCardColors
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -114,9 +118,10 @@ fun Stats(
     }
 
     Card(
-        modifier = Modifier.fillMaxSize(),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDarkMode) DarkBackground else LightBackground )
+        modifier = Modifier
+            .fillMaxSize()
+            .background(futuristicBackgroundBrush(isDarkMode)),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -149,6 +154,13 @@ fun Stats(
                     onClick = {
                         menuExpanded = false
                         navController.navigate("ProfilePage/$username")
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("Exercise") },
+                    onClick = {
+                        menuExpanded = false
+                        navController.navigate("Exercise/$username")
                     }
                 )
             }
@@ -201,12 +213,12 @@ fun Stats(
 @Composable
 fun StatsCard(totalTime: String, isDarkMode: Boolean = true) {
     Card(
-        modifier = Modifier .fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(16.dp),
-        shape = RoundedCornerShape(6.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDarkMode) DarkSurface else LightSurface ),
-        elevation = CardDefaults.cardElevation(defaultElevation =6.dp)
+        shape = RoundedCornerShape(24.dp),
+        colors = futuristicCardColors(isDarkMode),
+        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
@@ -233,12 +245,12 @@ fun StatsCard(totalTime: String, isDarkMode: Boolean = true) {
 @Composable
 fun MostSearchedMuscles(muscles: List<Pair<String, Int>>, isDarkMode: Boolean = true) {
     Card(
-        modifier = Modifier .fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(10.dp),
-        shape = RoundedCornerShape(6.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation =10.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDarkMode) DarkSurface else LightSurface )
+        shape = RoundedCornerShape(24.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+        colors = futuristicCardColors(isDarkMode)
     ) {
         Column(modifier = Modifier.padding(bottom =12.dp)) {
             Text(
@@ -290,12 +302,12 @@ fun MostSearchedMuscles(muscles: List<Pair<String, Int>>, isDarkMode: Boolean = 
 @Composable
 fun WaterIntakeStats(waterIntakeHistory: List<WaterIntake>, isDarkMode: Boolean = true) {
     Card(
-        modifier = Modifier .fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(10.dp),
-        shape = RoundedCornerShape(6.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDarkMode) DarkSurface else LightSurface )
+        shape = RoundedCornerShape(24.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+        colors = futuristicCardColors(isDarkMode)
     ) {
         Column(modifier = Modifier.padding(bottom = 12.dp)) {
             Text(

@@ -30,6 +30,9 @@ import com.example.muscles.RoomDb.Users
 import com.example.muscles.ui.theme.DarkBackground
 import com.example.muscles.ui.theme.DarkPrimary
 import com.example.muscles.ui.theme.DarkOnBackground
+import com.example.muscles.ui.theme.futuristicBackgroundBrush
+import com.example.muscles.ui.theme.futuristicButtonColors
+import com.example.muscles.ui.theme.futuristicTextFieldColors
 
 
 @Composable
@@ -45,11 +48,7 @@ fun RegisterPage(navController: NavController, userViewModel: UserViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    listOf(DarkBackground, Color(0xFF1A1F3A))
-                )
-            )
+            .background(futuristicBackgroundBrush(true))
     ) {
         Column(
             modifier = Modifier
@@ -59,179 +58,159 @@ fun RegisterPage(navController: NavController, userViewModel: UserViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(
-                text = "Create Account",
-                modifier = Modifier.padding(top = 48.dp, bottom = 12.dp),
-                color = Color.White,
-                fontSize = 44.sp,
-                fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.ExtraBold,
-                fontFamily = FontFamily.Serif
-            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Surface(
+                shape = RoundedCornerShape(32.dp),
+                color = Color.White.copy(alpha = 0.06f),
+                shadowElevation = 18.dp
+            ) {
+                Column(
+                    modifier = Modifier.padding(horizontal = 22.dp, vertical = 28.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Create Account",
+                        modifier = Modifier.padding(bottom = 12.dp),
+                        color = Color.White,
+                        fontSize = 44.sp,
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontFamily = FontFamily.Serif
+                    )
 
-            Text(
-                text = "Join the fitness community today",
-                modifier = Modifier.padding(bottom = 32.dp),
-                color = DarkOnBackground,
-                fontSize = 16.sp,
-                fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.Normal,
-                textAlign = TextAlign.Center
-            )
+                    Text(
+                        text = "Join the fitness community today",
+                        modifier = Modifier.padding(bottom = 28.dp),
+                        color = DarkOnBackground,
+                        fontSize = 16.sp,
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center
+                    )
 
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp),
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Full Name") },
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = DarkPrimary,
-                    unfocusedBorderColor = Color(0xFF404060),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    focusedLabelColor = DarkPrimary,
-                    unfocusedLabelColor = Color(0xFFB0B0C0),
-                    cursorColor = DarkPrimary
-                ),
-                shape = RoundedCornerShape(12.dp)
-            )
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 12.dp),
+                        value = name,
+                        onValueChange = { name = it },
+                        label = { Text("Full Name") },
+                        singleLine = true,
+                        colors = futuristicTextFieldColors(true, DarkPrimary),
+                        shape = RoundedCornerShape(18.dp)
+                    )
 
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp),
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = DarkPrimary,
-                    unfocusedBorderColor = Color(0xFF404060),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    focusedLabelColor = DarkPrimary,
-                    unfocusedLabelColor = Color(0xFFB0B0C0),
-                    cursorColor = DarkPrimary
-                ),
-                shape = RoundedCornerShape(12.dp)
-            )
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 12.dp),
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text("Email") },
+                        singleLine = true,
+                        colors = futuristicTextFieldColors(true, DarkPrimary),
+                        shape = RoundedCornerShape(18.dp)
+                    )
 
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp),
-                value = userName,
-                onValueChange = { userName = it },
-                label = { Text("Username") },
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = DarkPrimary,
-                    unfocusedBorderColor = Color(0xFF404060),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    focusedLabelColor = DarkPrimary,
-                    unfocusedLabelColor = Color(0xFFB0B0C0),
-                    cursorColor = DarkPrimary
-                ),
-                shape = RoundedCornerShape(12.dp)
-            )
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 12.dp),
+                        value = userName,
+                        onValueChange = { userName = it },
+                        label = { Text("Username") },
+                        singleLine = true,
+                        colors = futuristicTextFieldColors(true, DarkPrimary),
+                        shape = RoundedCornerShape(18.dp)
+                    )
 
-            OutlinedTextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp),
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = DarkPrimary,
-                    unfocusedBorderColor = Color(0xFF404060),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White,
-                    focusedLabelColor = DarkPrimary,
-                    unfocusedLabelColor = Color(0xFFB0B0C0),
-                    cursorColor = DarkPrimary
-                ),
-                shape = RoundedCornerShape(12.dp)
-            )
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 18.dp),
+                        value = password,
+                        onValueChange = { password = it },
+                        label = { Text("Password") },
+                        singleLine = true,
+                        visualTransformation = PasswordVisualTransformation(),
+                        colors = futuristicTextFieldColors(true, DarkPrimary),
+                        shape = RoundedCornerShape(18.dp)
+                    )
 
-            if (errorMessage.isNotEmpty()) {
-                Text(
-                    text = errorMessage,
-                    color = Color(0xFFFF6B6B),
-                    modifier = Modifier.padding(bottom = 12.dp),
-                    fontSize = 13.sp
-                )
-            }
+                    if (errorMessage.isNotEmpty()) {
+                        Text(
+                            text = errorMessage,
+                            color = Color(0xFFFF6B6B),
+                            modifier = Modifier.padding(bottom = 12.dp),
+                            fontSize = 13.sp
+                        )
+                    }
 
-            Button(
-                onClick = {
-                    when {
-                        name.isEmpty() || email.isEmpty() || userName.isEmpty() || password.isEmpty() -> {
-                            errorMessage = "Please fill in all fields"
-                        }
-                        else -> {
-                            val user = Users(
-                                username = userName,
-                                name = name,
-                                email = email,
-                                password = password,
-                                bio = bio,
-                                profileImageUri = null
-                            )
-                            userViewModel.registerUser(user) { success ->
-                                if (success) {
-                                    navController.navigate("loginPage")
-                                } else {
-                                    errorMessage = "Username or email already exists"
+                    Button(
+                        onClick = {
+                            when {
+                                name.isEmpty() || email.isEmpty() || userName.isEmpty() || password.isEmpty() -> {
+                                    errorMessage = "Please fill in all fields"
+                                }
+                                else -> {
+                                    val user = Users(
+                                        username = userName,
+                                        name = name,
+                                        email = email,
+                                        password = password,
+                                        bio = bio,
+                                        profileImageUri = null
+                                    )
+                                    userViewModel.registerUser(user) { success ->
+                                        if (success) {
+                                            navController.navigate("loginPage")
+                                        } else {
+                                            errorMessage = "Username or email already exists"
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(54.dp)
+                            .padding(bottom = 16.dp),
+                        colors = futuristicButtonColors(DarkPrimary),
+                        shape = RoundedCornerShape(18.dp)
+                    ) {
+                        Text(
+                            text = "Create Account",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            color = Color.White
+                        )
                     }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp)
-                    .padding(bottom = 16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = DarkPrimary),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = "Create Account",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = Color.White
-                )
-            }
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 32.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Already have an account? ",
-                    color = Color(0xFFB0B0C0),
-                    fontSize = 14.sp
-                )
-                Text(
-                    text = "Login",
-                    modifier = Modifier.clickable {
-                        navController.navigate("loginPage")
-                    },
-                    color = DarkPrimary,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Already have an account? ",
+                            color = Color(0xFFB0B0C0),
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = "Login",
+                            modifier = Modifier.clickable {
+                                navController.navigate("loginPage")
+                            },
+                            color = DarkPrimary,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }

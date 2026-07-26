@@ -41,6 +41,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
+import com.example.muscles.ui.theme.DarkBackground
+import com.example.muscles.ui.theme.DarkPrimary
+import com.example.muscles.ui.theme.DarkSecondary
+import com.example.muscles.ui.theme.DarkTertiary
 
 @Composable
 fun SplashScreen(
@@ -84,8 +88,13 @@ fun SplashScreen(
             .fillMaxSize()
             .background(
                 Brush.radialGradient(
-                    colors = listOf(Color(0xFF12162E), Color(0xFF070A16)),
-                    radius = 1200f
+                    colors = listOf(
+                        DarkPrimary.copy(alpha = 0.22f),
+                        DarkSecondary.copy(alpha = 0.16f),
+                        DarkBackground,
+                        Color(0xFF050814)
+                    ),
+                    radius = 1400f
                 )
             ),
         contentAlignment = Alignment.Center
@@ -95,7 +104,7 @@ fun SplashScreen(
                 .size(280.dp, 280.dp)
                 .background(
                     Brush.radialGradient(
-                        colors = listOf(Color(0x2A62E0C8), Color.Transparent),
+                        colors = listOf(DarkTertiary.copy(alpha = 0.20f), Color.Transparent),
                         radius = 260f
                     ),
                     shape = RoundedCornerShape(999.dp)
@@ -136,8 +145,8 @@ fun SplashScreen(
 
             Surface(
                 shape = RoundedCornerShape(28.dp),
-                color = Color.White.copy(alpha = 0.07f),
-                shadowElevation = 10.dp
+                color = Color.White.copy(alpha = 0.08f),
+                shadowElevation = 16.dp
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
