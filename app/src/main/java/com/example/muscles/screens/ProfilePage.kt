@@ -111,39 +111,69 @@ fun ProfilePage(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp, bottom = 12.dp)
+                .padding(top = 28.dp, bottom = 16.dp)
         ) {
             var menuExpanded by remember { mutableStateOf(false) }
 
-            Icon(
-                imageVector = Icons.Default.Menu,
-                contentDescription = "Menu",
-                tint = if (isDarkMode) DarkOnBackground else LightOnBackground,
+            // Burger Menu Button
+            androidx.compose.foundation.layout.Box(
                 modifier = Modifier
-                    .padding(start = 16.dp)
-                    .clickable { menuExpanded = true }
-            )
+                    .size(48.dp)
+                    .padding(start = 8.dp)
+                    .background(
+                        if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .clickable { menuExpanded = !menuExpanded }
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu",
+                    tint = if (isDarkMode) Color(0xFF60A5FA) else Color(0xFF1F1F1F),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
 
             DropdownMenu(
                 expanded = menuExpanded,
-                onDismissRequest = { menuExpanded = false }
+                onDismissRequest = { menuExpanded = false },
+                modifier = Modifier.background(
+                    if (isDarkMode) Color(0xFF1A1F3A) else Color.White
+                )
             ) {
                 DropdownMenuItem(
-                    text = { Text("Home Page") },
+                    text = { 
+                        Text(
+                            "Home Page",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("HomePage/$username")
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("Profile Page") },
+                    text = { 
+                        Text(
+                            "Profile Page",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("ProfilePage/$username")
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("Exercise") },
+                    text = { 
+                        Text(
+                            "Exercise",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("Exercise/$username")
@@ -165,14 +195,26 @@ fun ProfilePage(
                 )
             }
 
-            Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = "Exit",
-                tint = if (isDarkMode) DarkOnBackground else LightOnBackground,
+            // Close Button
+            androidx.compose.foundation.layout.Box(
                 modifier = Modifier
-                    .padding(end = 16.dp)
+                    .size(48.dp)
+                    .padding(end = 8.dp)
+                    .background(
+                        if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
                     .clickable { navController.navigate("HomePage/$username") }
-            )
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Exit",
+                    tint = if (isDarkMode) Color(0xFFF87171) else Color(0xFFDC2626),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -297,7 +339,7 @@ fun ProfilePage(
                                 .height(100.dp)
                                 .padding(top = 8.dp),
                             textStyle = TextStyle(
-                                color = if (isDarkMode) Color.Black else Color(0xFF0F1419),
+                                color = if (isDarkMode) Color.White else Color(0xFF0F1419),
                                 fontSize = 14.sp
                             ),
                             colors = OutlinedTextFieldDefaults.colors(

@@ -9,7 +9,7 @@ import com.example.muscles.RoomDb.Users
 import com.example.muscles.RoomDb.MuscleSearch
 import com.example.muscles.RoomDb.WaterIntake
 
-@Database(entities = [Users::class, MuscleSearch::class, WaterIntake::class], version = 4)
+@Database(entities = [Users::class, MuscleSearch::class, WaterIntake::class], version = 5)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 

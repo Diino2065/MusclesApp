@@ -53,6 +53,7 @@ import com.example.muscles.ui.theme.futuristicCardColors
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import com.example.muscles.RoomDb.WaterIntake
 
 
@@ -125,39 +126,71 @@ fun Stats(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier .fillMaxWidth()
-                .padding(top =24.dp, bottom =12.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 28.dp, bottom = 16.dp)
         ) {
             var menuExpanded by remember { mutableStateOf(false) }
 
-            Icon(
-                imageVector = Icons.Default.Menu,
-                contentDescription = "Menu",
-                tint = if (isDarkMode) DarkOnBackground else LightOnBackground,
-                modifier = Modifier .padding(start =16.dp)
-                    .clickable { menuExpanded = true }
-            )
+            // Burger Menu Button
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(start = 8.dp)
+                    .background(
+                        if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .clickable { menuExpanded = !menuExpanded }
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu",
+                    tint = if (isDarkMode) Color(0xFF60A5FA) else Color(0xFF1F1F1F),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
 
             DropdownMenu(
                 expanded = menuExpanded,
-                onDismissRequest = { menuExpanded = false }
+                onDismissRequest = { menuExpanded = false },
+                modifier = Modifier.background(
+                    if (isDarkMode) Color(0xFF1A1F3A) else Color.White
+                )
             ) {
                 DropdownMenuItem(
-                    text = { Text("Home Page") },
+                    text = { 
+                        Text(
+                            "Home Page",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("HomePage/$username")
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("Profile Page") },
+                    text = { 
+                        Text(
+                            "Profile Page",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("ProfilePage/$username")
                     }
                 )
                 DropdownMenuItem(
-                    text = { Text("Exercise") },
+                    text = { 
+                        Text(
+                            "Exercise",
+                            color = if (isDarkMode) Color.White else Color.Black
+                        ) 
+                    },
                     onClick = {
                         menuExpanded = false
                         navController.navigate("Exercise/$username")
@@ -167,23 +200,38 @@ fun Stats(
 
             Box(
                 modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.Center ) {
+                contentAlignment = Alignment.Center
+            ) {
                 Text(
                     text = "Muscles",
                     color = if (isDarkMode) DarkOnBackground else LightOnBackground,
-                    fontSize =32.sp,
+                    fontSize = 32.sp,
                     fontWeight = FontWeight.SemiBold,
                     fontStyle = FontStyle.Italic,
-                    letterSpacing =0.5.sp )
+                    letterSpacing = 0.5.sp
+                )
             }
 
-            Icon(
-                imageVector = Icons.Default.Close,
-                contentDescription = "Exit",
-                tint = if (isDarkMode) DarkOnBackground else LightOnBackground,
-                modifier = Modifier .padding(end =16.dp)
-                    .clickable { navController.navigate("ProfilePage/$username") }
-            )
+            // Close Button
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(end = 8.dp)
+                    .background(
+                        if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                    .clickable { navController.navigate("HomePage/$username") }
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Exit",
+                    tint = if (isDarkMode) Color(0xFFF87171) else Color(0xFFDC2626),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
         }
 
         LazyColumn(

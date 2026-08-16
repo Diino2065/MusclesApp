@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -26,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -38,7 +40,7 @@ import com.example.muscles.ui.theme.FuturisticMediumShape
 import com.example.muscles.ui.theme.SuccessGreen
 import com.example.muscles.ui.theme.WarningOrange
 
-// ========== LOADING STATES ==========
+
 
 @Composable
 fun LoadingScreen(message: String = "Loading...") {
@@ -96,7 +98,7 @@ fun LoadingCard(isLoading: Boolean = false) {
     }
 }
 
-// ========== EMPTY STATES ==========
+
 
 @Composable
 fun EmptyStateScreen(
@@ -145,7 +147,7 @@ fun EmptyStateScreen(
     }
 }
 
-// ========== FEEDBACK CARDS ==========
+
 
 @Composable
 fun SuccessCard(title: String, message: String) {
@@ -193,7 +195,7 @@ fun InfoCard(title: String, message: String) {
 
 @Composable
 fun StateCard(
-    icon: androidx.compose.material.icons.filled.Close? = null,
+    icon: ImageVector? = null,
     iconColor: Color = Color.Gray,
     title: String,
     message: String,
@@ -220,7 +222,7 @@ fun StateCard(
                     tint = iconColor,
                     modifier = Modifier.size(32.dp)
                 )
-                Spacer(modifier = Modifier.padding(12.dp))
+                Spacer(modifier = Modifier.width(12.dp))
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -240,7 +242,6 @@ fun StateCard(
     }
 }
 
-// ========== ACHIEVEMENT BADGE ==========
 
 @Composable
 fun AchievementBadge(
@@ -311,7 +312,7 @@ fun AchievementBadge(
     }
 }
 
-// ========== PROGRESS BAR WITH TEXT ==========
+
 
 @Composable
 fun ProgressBar(

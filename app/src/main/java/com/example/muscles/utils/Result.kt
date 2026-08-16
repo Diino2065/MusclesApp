@@ -1,8 +1,6 @@
 package com.example.muscles.utils
 
-/**
- * A generic Result wrapper for handling success and failure states
- */
+
 sealed class Result<out T> {
     data class Success<T>(val data: T) : Result<T>()
     data class Error(val exception: Exception, val message: String = exception.message ?: "Unknown error") : Result<Nothing>()

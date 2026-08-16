@@ -4,9 +4,7 @@ import android.util.Patterns
 
 object InputValidator {
     
-    /**
-     * Validate email format
-     */
+
     fun isValidEmail(email: String): Pair<Boolean, String> {
         return when {
             email.isEmpty() -> Pair(false, "Email cannot be empty")
@@ -17,14 +15,7 @@ object InputValidator {
         }
     }
     
-    /**
-     * Validate password strength
-     * - At least 8 characters
-     * - At least one uppercase letter
-     * - At least one lowercase letter
-     * - At least one digit
-     * - At least one special character (!@#$%^&*)
-     */
+
     fun isValidPassword(password: String): Pair<Boolean, String> {
         return when {
             password.isEmpty() -> Pair(false, "Password cannot be empty")
@@ -40,7 +31,6 @@ object InputValidator {
             else -> Pair(true, "")
         }
     }
-    
     /**
      * Validate username
      * - 3-20 characters
@@ -60,9 +50,7 @@ object InputValidator {
         }
     }
     
-    /**
-     * Validate name (first or last name)
-     */
+
     fun isValidName(name: String): Pair<Boolean, String> {
         return when {
             name.isEmpty() -> Pair(false, "Name cannot be empty")
@@ -74,9 +62,7 @@ object InputValidator {
         }
     }
     
-    /**
-     * Validate bio
-     */
+
     fun isValidBio(bio: String): Pair<Boolean, String> {
         return when {
             bio.length > 500 -> Pair(false, "Bio must be at most 500 characters")
@@ -84,9 +70,7 @@ object InputValidator {
         }
     }
     
-    /**
-     * Validate BMI inputs
-     */
+
     fun isValidHeight(height: Double): Pair<Boolean, String> {
         return when {
             height <= 0 -> Pair(false, "Height must be greater than 0")
@@ -103,9 +87,7 @@ object InputValidator {
         }
     }
     
-    /**
-     * Validate water intake
-     */
+
     fun isValidWaterIntake(liters: Double): Pair<Boolean, String> {
         return when {
             liters < 0 -> Pair(false, "Water intake cannot be negative")

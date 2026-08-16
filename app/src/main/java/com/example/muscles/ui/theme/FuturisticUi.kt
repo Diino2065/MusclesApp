@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-// ========== GRADIENT BRUSHES ==========
+
 
 fun futuristicBackgroundBrush(isDarkMode: Boolean): Brush {
     return if (isDarkMode) {
@@ -64,7 +64,7 @@ fun muscleGroupGradient(muscleColor: Color): Brush {
     )
 }
 
-// ========== CARD COLORS ==========
+
 
 @Composable
 fun futuristicCardColors(isDarkMode: Boolean): CardColors {
@@ -80,7 +80,7 @@ fun achievementCardColors(): CardColors {
     )
 }
 
-// ========== BUTTON COLORS ==========
+
 
 @Composable
 fun futuristicButtonColors(accent: Color): ButtonColors {
@@ -124,7 +124,7 @@ fun dangerButtonColors(): ButtonColors {
     )
 }
 
-// ========== TEXT FIELD COLORS ==========
+
 
 @Composable
 fun futuristicTextFieldColors(isDarkMode: Boolean, accent: Color): androidx.compose.material3.TextFieldColors {
@@ -139,14 +139,14 @@ fun futuristicTextFieldColors(isDarkMode: Boolean, accent: Color): androidx.comp
     )
 }
 
-// ========== SHAPE CONSTANTS ==========
+
 
 val FuturisticSmallShape = RoundedCornerShape(8.dp)
 val FuturisticMediumShape = RoundedCornerShape(12.dp)
 val FuturisticLargeShape = RoundedCornerShape(16.dp)
 val FuturisticExtraLargeShape = RoundedCornerShape(20.dp)
 
-// ========== ELEVATION & SHADOWS ==========
+
 
 fun premiumCardElevation(isDarkMode: Boolean): Float {
     return if (isDarkMode) 8f else 4f
@@ -160,7 +160,7 @@ fun futuristicGlassEffect(isDarkMode: Boolean): Color {
     }
 }
 
-// ========== ANIMATION CONSTANTS ==========
+
 
 const val ShortAnimationDuration = 200
 const val MediumAnimationDuration = 400

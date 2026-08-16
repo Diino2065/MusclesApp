@@ -10,7 +10,7 @@ data class Users(
     val name: String,
     val email: String,
     val username: String,
-    val password: String,  // Now stores hashed password
+    val password: String,  //hash
     val bio: String?= null,
     val profileImageUri: String?,
     val totalTimeSpentSeconds: Long = 0,
@@ -24,13 +24,13 @@ data class Users(
     val totalWorkouts: Int = 0,
     val totalExercisesCompleted: Int = 0,
     
-    // Profile Enhancement
+
     val age: Int? = null,
-    val gender: String? = null,  // "M", "F", "Other"
-    val experienceLevel: String? = null,  // "Beginner", "Intermediate", "Advanced"
-    val fitnessGoal: String? = null,  // "Strength", "Endurance", "Flexibility", "Weight Loss", "Muscle Gain"
-    val height: Double? = null,  // in cm
-    val weight: Double? = null,  // in kg
+    val gender: String? = null,
+    val experienceLevel: String? = null,
+    val fitnessGoal: String? = null,
+    val height: Double? = null,
+    val weight: Double? = null,
     val isEmailVerified: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val lastModified: Long = System.currentTimeMillis()

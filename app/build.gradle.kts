@@ -28,7 +28,7 @@ android {
         }
     }
 
-    // 🔥 THESE MUST BE INSIDE android{}
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
@@ -86,5 +87,7 @@ dependencies {
     
     // Logging
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+    implementation("at.favre.lib:bcrypt:0.10.2")
 
 }

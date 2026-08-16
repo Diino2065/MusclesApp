@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey
 data class Achievement(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,
-    val achievementType: String,  // "first_workout", "streak_7", "streak_30", "workout_100", etc.
+    val achievementType: String,
     val title: String,
     val description: String,
     val icon: String,  // emoji or drawable reference
@@ -87,7 +87,7 @@ data class ExerciseLog(
     val muscleGroup: String,
     val sets: Int,
     val reps: Int,
-    val weight: Double = 0.0,  // in kg
+    val weight: Double = 0.0,
     val restTimeSeconds: Int = 0,
     val notes: String? = null,
     val difficulty: String? = null  // "Easy", "Medium", "Hard"
@@ -107,10 +107,10 @@ data class ExerciseLog(
 data class DailyChallenge(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,
-    val date: Long,  // Date the challenge was created
+    val date: Long,
     val challengeName: String,
     val description: String,
-    val targetCount: Int,  // e.g., 10 exercises, 5000 steps
+    val targetCount: Int,
     val currentProgress: Int = 0,
     val pointsReward: Int = 50,
     val isCompleted: Boolean = false,
@@ -131,7 +131,7 @@ data class DailyChallenge(
 data class UserBadge(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,
-    val badgeType: String,  // "beginner", "expert", "social_butterfly", "iron_will", etc.
+    val badgeType: String,
     val badgeName: String,
     val icon: String,
     val earnedDate: Long = System.currentTimeMillis()

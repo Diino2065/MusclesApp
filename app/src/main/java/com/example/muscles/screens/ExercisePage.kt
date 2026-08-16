@@ -47,9 +47,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.ui.draw.scale
 import com.example.muscles.ui.theme.futuristicBackgroundBrush
 import com.example.muscles.ui.theme.futuristicButtonColors
 import com.example.muscles.ui.theme.futuristicCardColors
+import com.example.muscles.ui.theme.ShortAnimationDuration
+import com.example.muscles.ui.theme.MediumAnimationDuration
 
 private data class WorkoutExercise(
     val name: String,
@@ -108,6 +114,7 @@ private val workoutPlans = listOf(
     )
 )
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ExercisePage(
     navController: NavController,
@@ -163,37 +170,67 @@ fun ExercisePage(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp, bottom = 12.dp)
+                    .padding(top = 28.dp, bottom = 16.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu",
-                    tint = if (isDarkMode) Color.White else Color.Black,
+                // Burger Menu Button
+                androidx.compose.foundation.layout.Box(
                     modifier = Modifier
-                        .padding(start = 16.dp)
-                        .clickable { menuExpanded = true }
-                )
+                        .size(48.dp)
+                        .padding(start = 8.dp)
+                        .background(
+                            if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        .clickable { menuExpanded = !menuExpanded }
+                        .padding(12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Menu",
+                        tint = if (isDarkMode) Color(0xFF60A5FA) else Color(0xFF1F1F1F),
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
 
                 DropdownMenu(
                     expanded = menuExpanded,
-                    onDismissRequest = { menuExpanded = false }
+                    onDismissRequest = { menuExpanded = false },
+                    modifier = Modifier.background(
+                        if (isDarkMode) Color(0xFF1A1F3A) else Color.White
+                    )
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Home Page") },
+                        text = { 
+                            Text(
+                                "Home Page",
+                                color = if (isDarkMode) Color.White else Color.Black
+                            ) 
+                        },
                         onClick = {
                             menuExpanded = false
                             navController.navigate("HomePage/$username")
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Profile Page") },
+                        text = { 
+                            Text(
+                                "Profile Page",
+                                color = if (isDarkMode) Color.White else Color.Black
+                            ) 
+                        },
                         onClick = {
                             menuExpanded = false
                             navController.navigate("ProfilePage/$username")
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Stats") },
+                        text = { 
+                            Text(
+                                "Stats",
+                                color = if (isDarkMode) Color.White else Color.Black
+                            ) 
+                        },
                         onClick = {
                             menuExpanded = false
                             navController.navigate("Stats/$username")
@@ -214,14 +251,27 @@ fun ExercisePage(
                     )
                 }
 
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Exit",
-                    tint = if (isDarkMode) Color.White else Color.Black,
+                // Close Button
+                androidx.compose.foundation.layout.Box(
                     modifier = Modifier
-                        .padding(end = 16.dp)
+                        .size(48.dp)
+                        .padding(end = 8.dp)
+                        .background(
+                            if (isDarkMode) Color(0xFF1A1F3A).copy(alpha = 0.6f) else Color.White.copy(alpha = 0.1f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
                         .clickable { navController.navigate("HomePage/$username") }
-                )
+                        .padding(12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Exit",
+                        tint = if (isDarkMode) Color(0xFFF87171) else Color(0xFFDC2626),
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
             }
         }
 
@@ -253,24 +303,25 @@ fun ExercisePage(
             ) {
                 workoutPlans.forEach { plan ->
                     val isSelected = plan.id == selectedPlanId
-                    OutlinedButton(
-                        onClick = {
-                            if (!workoutRunning) {
-                                selectedPlanId = plan.id
-                                activeExerciseIndex = 0
-                                elapsedSeconds = 0L
-                            }
-                        },
-                        modifier = Modifier.weight(1f),
-                        enabled = !workoutRunning,
-                        colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = if (isSelected) plan.color else if (isDarkMode) Color.White else Color.Black
-                        ),
-                        shape = RoundedCornerShape(22.dp)
-                    ) {
-                        Text(plan.title)
-                    }
-                }
+                                    val btnScale by animateFloatAsState(targetValue = if (isSelected) 1.03f else 1f, animationSpec = tween(durationMillis = ShortAnimationDuration))
+                                    OutlinedButton(
+                                        onClick = {
+                                            if (!workoutRunning) {
+                                                selectedPlanId = plan.id
+                                                activeExerciseIndex = 0
+                                                elapsedSeconds = 0L
+                                            }
+                                        },
+                                        modifier = Modifier.weight(1f).scale(btnScale),
+                                        enabled = !workoutRunning,
+                                        colors = ButtonDefaults.outlinedButtonColors(
+                                            contentColor = if (isSelected) plan.color else if (isDarkMode) Color.White else Color.Black
+                                        ),
+                                        shape = RoundedCornerShape(22.dp)
+                                    ) {
+                                        Text(plan.title)
+                                    }
+                                }
             }
         }
 
@@ -345,24 +396,43 @@ fun ExercisePage(
         }
 
         item {
-            ExerciseStatusCard(
-                title = "Current exercise",
-                exercise = currentExercise,
-                accent = selectedPlan.color,
-                isDarkMode = isDarkMode,
-                isHighlighted = true
-            )
-        }
+                    val currentExerciseTransition = tween<ExitTransition>(durationMillis = MediumAnimationDuration)
+                    AnimatedContent(
+                        targetState = currentExercise,
+                        transitionSpec = {
+                            (fadeIn(animationSpec = tween(durationMillis = MediumAnimationDuration)) + slideInHorizontally(animationSpec = tween(durationMillis = MediumAnimationDuration)) { full -> full / 4 }) togetherWith 
+                            (fadeOut(animationSpec = tween(durationMillis = MediumAnimationDuration)) + slideOutHorizontally(animationSpec = tween(durationMillis = MediumAnimationDuration)) { full -> -full / 6 })
+                        },
+                        label = "CurrentExerciseAnimation"
+                    ) { ex ->
+                        ExerciseStatusCard(
+                            title = "Current exercise",
+                            exercise = ex,
+                            accent = selectedPlan.color,
+                            isDarkMode = isDarkMode,
+                            isHighlighted = true
+                        )
+                    }
+                }
 
         item {
-            ExerciseStatusCard(
-                title = "Next exercise",
-                exercise = nextExercise,
-                accent = Color(0xFF94A3B8),
-                isDarkMode = isDarkMode,
-                isHighlighted = false
-            )
-        }
+                    AnimatedContent(
+                        targetState = nextExercise,
+                        transitionSpec = {
+                            (fadeIn(animationSpec = tween(durationMillis = MediumAnimationDuration)) + slideInHorizontally(animationSpec = tween(durationMillis = MediumAnimationDuration)) { full -> full / 3 }) togetherWith 
+                            (fadeOut(animationSpec = tween(durationMillis = MediumAnimationDuration)) + slideOutHorizontally(animationSpec = tween(durationMillis = MediumAnimationDuration)) { full -> -full / 6 })
+                        },
+                        label = "NextExerciseAnimation"
+                    ) { ex ->
+                        ExerciseStatusCard(
+                            title = "Next exercise",
+                            exercise = ex,
+                            accent = Color(0xFF94A3B8),
+                            isDarkMode = isDarkMode,
+                            isHighlighted = false
+                        )
+                    }
+                }
 
         item {
             Button(

@@ -8,7 +8,9 @@ import java.util.Date
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
@@ -27,6 +29,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.rotate
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.ui.input.pointer.pointerInput
@@ -47,6 +51,8 @@ import com.example.muscles.ui.theme.futuristicBackgroundBrush
 import com.example.muscles.ui.theme.futuristicButtonColors
 import com.example.muscles.ui.theme.futuristicCardColors
 import com.example.muscles.ui.theme.futuristicTextFieldColors
+import com.example.muscles.ui.theme.ShortAnimationDuration
+import com.example.muscles.ui.theme.MediumAnimationDuration
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.WebChromeClient
@@ -248,7 +254,7 @@ private val muscleDatabase = listOf(
 
 )
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun HomePage(
     navController: NavController,
@@ -305,9 +311,10 @@ fun HomePage(
                 .padding(top = 20.dp, start = 12.dp, end = 12.dp, bottom = 12.dp)
         ) {
 
-            IconButton(onClick = { onThemeChange(!isDarkMode) }) {
-                Text("☀️")
-            }
+            val themeRotation by animateFloatAsState(targetValue = if (!isDarkMode) 0f else 180f, animationSpec = tween(durationMillis = ShortAnimationDuration))
+                        IconButton(onClick = { onThemeChange(!isDarkMode) }) {
+                            Text("☀️", modifier = Modifier.rotate(themeRotation))
+                        }
 
             Box(
                 modifier = Modifier.weight(1f).height(40.dp)
@@ -376,35 +383,41 @@ fun HomePage(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Button(
-                    onClick = {
-                        use3DModel = true
-                        modelLoadFailed = false
-                    },
-                    modifier = Modifier.weight(1f),
-                    colors = futuristicButtonColors(colors.primary)
-                ) {
-                    Text("3D Model")
-                }
+                            val selected3D = use3DModel
+                            val selectedBMI = !use3DModel && !modelLoadFailed
+                            val scale3D by animateFloatAsState(targetValue = if (selected3D) 1.03f else 1f, animationSpec = tween(durationMillis = ShortAnimationDuration))
+                            val scaleBMI by animateFloatAsState(targetValue = if (selectedBMI) 1.03f else 1f, animationSpec = tween(durationMillis = ShortAnimationDuration))
+                            val scaleWorkout by animateFloatAsState(targetValue = 1f, animationSpec = tween(durationMillis = ShortAnimationDuration))
 
-                OutlinedButton(
-                    onClick = {
-                        use3DModel = false
-                        modelLoadFailed = false
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text("BMI Calculator")
-                }
+                            Button(
+                                onClick = {
+                                    use3DModel = true
+                                    modelLoadFailed = false
+                                },
+                                modifier = Modifier.weight(1f).scale(scale3D),
+                                colors = futuristicButtonColors(colors.primary)
+                            ) {
+                                Text("3D Model")
+                            }
 
-                Button(
-                    onClick = { navController.navigate("Exercise/$username") },
-                    modifier = Modifier.weight(1f),
-                    colors = futuristicButtonColors(colors.primary)
-                ) {
-                    Text("Workout")
-                }
-            }
+                            OutlinedButton(
+                                onClick = {
+                                    use3DModel = false
+                                    modelLoadFailed = false
+                                },
+                                modifier = Modifier.weight(1f).scale(scaleBMI)
+                            ) {
+                                Text("BMI Calculator")
+                            }
+
+                            Button(
+                                onClick = { navController.navigate("Exercise/$username") },
+                                modifier = Modifier.weight(1f).scale(scaleWorkout),
+                                colors = futuristicButtonColors(colors.primary)
+                            ) {
+                                Text("Workout")
+                            }
+                        }
 
             if (modelLoadFailed) {
                 Spacer(Modifier.height(8.dp))
@@ -425,64 +438,71 @@ fun HomePage(
             ) {
 
                 val show3D = use3DModel && !modelLoadFailed
-                Crossfade(targetState = show3D) { show ->
-                    if (show) {
-                        HumanBody3D(
-                            onMuscleClicked = { muscleId: String ->
-                                Log.d("HomePage", "Selected muscle from 3D model: $muscleId")
+                AnimatedContent(
+                    targetState = show3D,
+                    transitionSpec = {
+                        (fadeIn(animationSpec = tween(durationMillis = MediumAnimationDuration)) + scaleIn(animationSpec = tween(durationMillis = MediumAnimationDuration), initialScale = 0.98f)) togetherWith
+                        (fadeOut(animationSpec = tween(durationMillis = MediumAnimationDuration)) + scaleOut(animationSpec = tween(durationMillis = MediumAnimationDuration), targetScale = 0.98f))
+                    },
+                    label = "3DModelAnimation"
+                ) { show ->
+                                    if (show) {
+                                        HumanBody3D(
+                                            onMuscleClicked = { muscleId: String ->
+                                                Log.d("HomePage", "Selected muscle from 3D model: $muscleId")
 
-                                val muscle = muscleDatabase.find {
-                                    it.id.equals(muscleId.trim(), ignoreCase = true)
-                                }
+                                                val muscle = muscleDatabase.find {
+                                                    it.id.equals(muscleId.trim(), ignoreCase = true)
+                                                }
 
-                                if (muscle != null) {
-                                    selectedMuscle = muscle
-                                    selectedExerciseIndex = 0
-                                    Log.d("HomePage", "Loaded muscle info: ${muscle.name}")
-                                } else {
-                                    Log.e("HomePage", "Muscle not found: $muscleId")
-                                }
-                            },
-                            onModelFailed = {
-                                modelLoadFailed = true
-                                use3DModel = false
-                            }
-                        )
-                    } else {
-                        BMICalculatorCard(
-                            heightText = bmiHeightCm,
-                            weightText = bmiWeightKg,
-                            bmiResult = bmiResult,
-                            isDarkMode = isDarkMode,
-                            onHeightChange = {
-                                bmiHeightCm = it
+                                                if (muscle != null) {
+                                                    selectedMuscle = muscle
+                                                    selectedExerciseIndex = 0
+                                                    Log.d("HomePage", "Loaded muscle info: ${muscle.name}")
+                                                } else {
+                                                    Log.e("HomePage", "Muscle not found: $muscleId")
+                                                }
+                                            },
+                                            onModelFailed = {
+                                                modelLoadFailed = true
+                                                use3DModel = false
+                                            }
+                                        )
+                                    } else {
+                                        BMICalculatorCard(
+                                            heightText = bmiHeightCm,
+                                            weightText = bmiWeightKg,
+                                            bmiResult = bmiResult,
+                                            isDarkMode = isDarkMode,
+                                            onHeightChange = {
+                                                bmiHeightCm = it
                                 bmiResult = null
                             },
-                            onWeightChange = {
-                                bmiWeightKg = it
-                                bmiResult = null
-                            },
-                            onCalculate = {
-                                val height = bmiHeightCm.toFloatOrNull()
-                                val weight = bmiWeightKg.toFloatOrNull()
+                                            onWeightChange = {
+                                                bmiWeightKg = it
+                                                bmiResult = null
+                                            },
+                                            onCalculate = {
+                                                val height = bmiHeightCm.toFloatOrNull()
+                                                val weight = bmiWeightKg.toFloatOrNull()
 
-                                bmiResult = if (height == null || weight == null || height <= 0f || weight <= 0f) {
-                                    "Enter valid height and weight"
-                                } else {
-                                    val heightM = height / 100f
-                                    val bmi = weight / (heightM * heightM)
-                                    val category = when {
-                                        bmi < 18.5f -> "Underweight"
-                                        bmi < 25f -> "Normal"
-                                        bmi < 30f -> "Overweight"
-                                        else -> "Obese"
+                                                bmiResult = if (height == null || weight == null || height <= 0f || weight <= 0f) {
+                                                    "Enter valid height and weight"
+                                                } else {
+                                                    val heightM = height / 100f
+                                                    val bmi = weight / (heightM * heightM)
+                                                    val category = when {
+                                                        bmi < 18.5f -> "Underweight"
+                                                        bmi < 25f -> "Normal"
+                                                        bmi < 30f -> "Overweight"
+                                                        else -> "Obese"
+                                                    }
+                                                    "BMI: ${String.format(Locale.US, "%.1f", bmi)} ($category)"
+                                                }
+                                            }
+                                        )
                                     }
-                                    "BMI: ${String.format(Locale.US, "%.1f", bmi)} ($category)"
                                 }
-                            }
-                        )
-                    }
-                }
             }
 
             Spacer(Modifier.height(12.dp))
@@ -629,12 +649,18 @@ fun HomePage(
 
                         key("${muscle.id}_${ex.name}_$index") {
 
-                            ExerciseCard(
-                                exercise = ex,
-                                imageLoader = imageLoader,
-                                colors = colors
-                            )
-                        }
+                                                    AnimatedVisibility(
+                                                        visible = true,
+                                                        enter = fadeIn(animationSpec = tween(240)) + slideInHorizontally(animationSpec = tween(240)) { fullWidth -> fullWidth / 4 },
+                                                        exit = fadeOut(animationSpec = tween(180))
+                                                    ) {
+                                                        ExerciseCard(
+                                                            exercise = ex,
+                                                            imageLoader = imageLoader,
+                                                            colors = colors
+                                                        )
+                                                    }
+                                                }
                     }
                 }
             }
