@@ -155,7 +155,7 @@ app/src/main/java/com/example/muscles/
 
 **Za UI promjene**: Menjajte `HomePage.kt`
 **Za logiku**: Menjajte `UserViewModel.kt`
-**Za bazu**: Menjajte `RoomDb/` fajlove
+**Za bazu**: Mijenjajte `RoomDb/` fajlove
 
 ---
 
