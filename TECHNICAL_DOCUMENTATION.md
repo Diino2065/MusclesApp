@@ -16,7 +16,7 @@
 4. [Baza Podataka](#baza-podataka)
 5. [Ključne Komponente](#ključne-komponente)
 6. [API Reference](#api-reference)
-7. [Integracijske Točke](#integracijske-točke)
+7. [Integracijske Tačke](#integracijske-točke)
 8. [Build & Deployment](#build--deployment)
 9. [Debugging](#debugging)
 
