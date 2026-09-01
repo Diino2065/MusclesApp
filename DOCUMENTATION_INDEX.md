@@ -147,5 +147,4 @@ project-root/
 
 ---
 
-**Sretno učenja i kodiranja! 💪**
 
