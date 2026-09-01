@@ -1,4 +1,4 @@
-# 🔧 MUSCLES - Tehnička Dokumentacija
+#  MUSCLES - Tehnička Dokumentacija
 
 **Verzija**: 1.0
 **Platforma**: Android (Compose framework)
@@ -8,7 +8,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Arhitektura](#arhitektura)
 2. [Tehnološki Stack](#tehnološki-stack)
@@ -22,7 +22,7 @@
 
 ---
 
-## 🏗️ Arhitektura
+##  Arhitektura
 
 Aplikacija koristi **MVVM (Model-View-ViewModel)** arhitekturu sa Room bazom podataka za lokalno skladištenje.
 
@@ -34,7 +34,7 @@ Aplikacija koristi **MVVM (Model-View-ViewModel)** arhitekturu sa Room bazom pod
 ├─────────────────┤
 │  Repository     │ (UserDao, UserViewModel)
 ├─────────────────┤
-│  Local Database │ (Room - SQLite)
+│  Local Database │ (Room)
 └─────────────────┘
 ```
 
@@ -49,7 +49,7 @@ Aplikacija koristi **MVVM (Model-View-ViewModel)** arhitekturu sa Room bazom pod
 
 ---
 
-## 🛠️ Tehnološki Stack
+##  Tehnološki Stack
 
 ### Kotlin & Compose
 - **Kotlin 1.8+** - Glavni programski jezik
@@ -82,7 +82,7 @@ Aplikacija koristi **MVVM (Model-View-ViewModel)** arhitekturu sa Room bazom pod
 
 ---
 
-## 📂 Struktura Projekta
+##  Struktura Projekta
 
 ```
 Muscles/
@@ -130,7 +130,7 @@ Muscles/
 
 ---
 
-## 💾 Baza Podataka
+##  Baza Podataka
 
 ### Room Database Setup
 
@@ -226,7 +226,7 @@ suspend fun updateTotalTime(username: String, seconds: Long)
 
 ---
 
-## 🎯 Ključne Komponente
+##  Ključne Komponente
 
 ### 1. HomePage.kt - Glavni ekran
 
@@ -295,15 +295,15 @@ fun updateTotalTime(username: String, seconds: Long)
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### Chatbot Responses
 
 ```kotlin
 private val chatbotResponses = listOf(
-    "💧 Pij najmanje 2-3 litre vode dnevno za bolji metabolism!",
-    "🥗 Konzumiraj više proteina nakon treninga za bolje mišićne rezultate!",
-    "🏃 Redovna vježbanja 30 minuta dnevno čini razliku u zdravlju!",
+    " Pij najmanje 2-3 litre vode dnevno za bolji metabolism!",
+    " Konzumiraj više proteina nakon treninga za bolje mišićne rezultate!",
+    " Redovna vježbanja 30 minuta dnevno čini razliku u zdravlju!",
     ...more tips
 )
 ```
@@ -334,7 +334,7 @@ data class Exercise(
 
 ---
 
-## 🔗 Integracijske Točke
+##  Integracijske Tačke
 
 ### WebView Integration (3D Model)
 
@@ -388,7 +388,7 @@ navController.navigate("HomePage/$username")
 
 ---
 
-## 🔨 Build & Deployment
+##  Build & Deployment
 
 ### Build Variants
 
@@ -402,7 +402,7 @@ navController.navigate("HomePage/$username")
 
 ### ProGuard Configuration
 
-Konfigurirano u `app/proguard-rules.pro` za optimizaciju i obfuskaciju koda.
+Konfigurirano u `app/proguard-rules.pro` za optimizaciju
 
 ### Dependencies
 
@@ -416,7 +416,7 @@ Ključne zavisnosti iz `build.gradle.kts`:
 
 ---
 
-## 🐛 Debugging
+##  Debugging
 
 ### Logovanje
 
@@ -460,43 +460,8 @@ Log.w("GifLoader", "Failed to load GIF: ${currentUrl}")
 
 ---
 
-## 📈 Performance Considerations
-
-1. **Image Loading** - Coil koristi cache za manje re-renderiranja
-2. **Database Queries** - Koristi coroutines za async operacije
-3. **Recomposition** - Compose optimizira samo izmijenjene komponente
-4. **Memory** - WebView za 3D dapat biti memory-intensive
 
 ---
 
-## 🔐 Security Best Practices
 
-1. **Password Hashing** - Trebalo bi koristiti bcrypt ili PBKDF2 (trenutno ne implementirano - FIX!)
-2. **Data Encryption** - Razmislite o encrypciji osjetljivih podataka
-3. **SQL Injection** - Room koristi prepared statements (safe)
-4. **WebView Security** - `setJavaScriptEnabled` može biti XSS rizik
-
----
-
-## 📋 Future Enhancements
-
-- [ ] Cloud synchronization
-- [ ] Social sharing
-- [ ] Workout history tracking
-- [ ] Exercise form scoring (AI-based)
-- [ ] Offline mode
-- [ ] Push notifications
-- [ ] Video tutorials
-
----
-
-## 📞 Support & Contributing
-
-Za questions ili bug reports, otvorite issue na projektu.
-
----
-
-**Autor**: Development Team
-**Zadnja Ažuriranja**: Maj 2026
-**License**: MIT
 
