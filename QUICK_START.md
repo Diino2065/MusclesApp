@@ -3,7 +3,7 @@
 
 ---
 
-## 1⃣ Instalacija (5 minuta)
+## 1 Instalacija (5 minuta)
 
 ### Korak 1: Instalacija Android Studija
 1. Preuzmite [Android Studio](https://developer.android.com/studio)
@@ -70,7 +70,7 @@ Kliknite **"Sync Now"**
 
 ##  First Run (2 minuta)
 
-### Kreiraj Konto
+### Kreiraj Account
 1. Otvorite aplikaciju
 2. Kliknite **Sign Up**
 3. Unesite:
@@ -88,7 +88,7 @@ Kliknite **"Sync Now"**
 
 ---
 
-## 🎮 Osnovna Upotreba
+##  Osnovna Upotreba
 
 ### Interaktivni 3D Model
 ```
