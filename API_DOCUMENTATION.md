@@ -1,8 +1,8 @@
-# 📚 API DOKUMENTACIJA - Muscles Android App
+#  API DOKUMENTACIJA - Muscles Android App
 
 ---
 
-## 📑 Sadržaj
+##  Sadržaj
 
 1. [Composable Funkcije](#composable-funkcije)
 2. [ViewModel API](#viewmodel-api)
@@ -13,7 +13,7 @@
 
 ---
 
-## 🎨 Composable Funkcije
+##  Composable Funkcije
 
 ### HomePage
 
@@ -204,7 +204,7 @@ fun Stats(
 
 ---
 
-## 🔌 ViewModel API
+##  ViewModel API
 
 ### UserViewModel
 
@@ -273,7 +273,7 @@ fun getMostSearchedMuscles(userId: Int, onResult: (List<Pair<String, Int>>) -> U
 
 ---
 
-## 💾 Database Models
+##  Database Models
 
 ### Users Entity
 
@@ -398,7 +398,7 @@ data class Exercise(
 
 ---
 
-## 🗺️ Navigation Routes
+##  Navigation Routes
 
 ```kotlin
 // Home page
@@ -433,7 +433,7 @@ navController.navigate("HomePage/johndoe") {
 
 ---
 
-## 🎨 Theme & Colors
+##  Theme & Colors
 
 ### Dark Mode Colors
 
@@ -467,7 +467,7 @@ Text(
 
 ---
 
-## ⚠️ Error Handling
+##  Error Handling
 
 ### Try-Catch sa ViewModel
 
@@ -530,15 +530,15 @@ SubcomposeAsyncImage(
 
 ## 🔐 Security Notes
 
-⚠️ **Password Hashing**: Trebalo bi koristiti bcrypt ili PBKDF2 (trenutno nije implementirano)
+ **Password Hashing**: Koristiti bcrypt 
 
-⚠️ **WebView XSS**: Koristi `setJavaScriptEnabled = true` pažljivo
+ **WebView XSS**: Koristi `setJavaScriptEnabled = true` pažljivo
 
-✅ **SQL Injection**: Room koristi prepared statements (safe)
+ **SQL Injection**: Room koristi prepared statements (safe)
 
 ---
 
-## 📞 Support
+##  Support
 
 Za više info, pogledajte:
 - `TECHNICAL_DOCUMENTATION.md` - Detaljne arhitekturne informacije
