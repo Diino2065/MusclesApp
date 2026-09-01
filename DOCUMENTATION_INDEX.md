@@ -1,10 +1,10 @@
-# 📖 DOKUMENTACIJSKI INDEKS - Muscles Project
+##  DOKUMENTACIJSKI INDEKS - Muscles Project
 
 Ovdje možete pronaći sve dokumentacijske datoteke za ovaj projekt:
 
 ---
 
-## 📚 Dostupne Dokumentacije
+##  Dostupne Dokumentacije
 
 ### 1. **README.md** - Za Korisnike
 **Koga je namjenjeno**: Krajnji korisnici, beginner korisnici
@@ -76,7 +76,7 @@ Ovdje možete pronaći sve dokumentacijske datoteke za ovaj projekt:
 
 ---
 
-## 🗺️ Brz Redoslijed Čitanja
+##  Brz Redoslijed Čitanja
 
 ### Za Korisnike:
 1. **README.md** ← Počni ovdje
@@ -94,7 +94,7 @@ Ovdje možete pronaći sve dokumentacijske datoteke za ovaj projekt:
 
 ---
 
-## 🔍 Gdje Pronaći Što
+##  Gdje Pronaći Šta
 
 ### "Kako koristim aplikaciju?"
 → Čitaj **README.md**
@@ -113,7 +113,7 @@ Ovdje možete pronaći sve dokumentacijske datoteke za ovaj projekt:
 
 ---
 
-## 📋 Struktura Dokumentacije
+##  Struktura Dokumentacije
 
 ```
 project-root/
@@ -141,40 +141,9 @@ project-root/
 ⭐ = Must-read
 \- = Not relevant
 
----
 
-## 🚀 Brz Pristup
 
-**Trebam brzinu!** → QUICK_START.md
-**Trebam detalje!** → TECHNICAL_DOCUMENTATION.md
-**Trebam API!** → API_DOCUMENTATION.md
-**Trebam doprinjeti!** → CONTRIBUTING.md
-**Trebam koristiti app!** → README.md
 
----
-
-## 💡 Pro Tips
-
-👉 **Tip 1**: Koristite Ctrl+F za pretragu unutab dokumenta
-👉 **Tip 2**: Sljedite linkove u dokumentima za više info
-👉 **Tip 3**: Vraćajte se na ovaj indeks kada ste zbunjeni
-👉 **Tip 4**: Ažurirajte dokumentaciju kada dodajete features
-
----
-
-## 📞 Pitanja?
-
-1. **Provjeri dokumentaciju** (možda je već tu)
-2. **Otvorite Issue** na GitHub-u
-3. **Askujte maintainere**
-
----
-
-## 🎯 Zadnja Ažuriranja
-
-- **Verzija**: 1.0
-- **Datum**: Maj 2026
-- **Sve dokumentacije su sveže!** ✅
 
 ---
 
