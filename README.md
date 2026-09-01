@@ -2,16 +2,17 @@
 
 
 
-## 📱 Što je Muscles?
+##  Šta je Muscles?
 
 **Muscles** je moderna Android aplikacija koja vam pomaže da:
-- 🏋️ Objekt sve mišiće u vašem tijelu i njihove funkcije
-- 📊 Pratite svoju BMI vrijednost
-- 💧 Vodite dnevnik unosa vode
-- ⏱️ Pratite vrijeme provedeno u treningu
-- 🎯 Dobijate savjete o zdravlju i ishrani
+-  Objekat za sve mišiće u vašem tijelu i njihove funkcije
+-  Pratite svoju BMI vrijednost
+-  Vodite dnevnik unosa vode
+-  Pratite vrijeme provedeno u treningu
+-  Dobijate savjete o zdravlju i ishrani
+-  Obavljate trening
 
-## 🚀 Počni sa Muscles-om
+##  Počni sa Muscles-om
 
 ### Instalacija
 1. Preuzmite aplikaciju na svoj Android telefon
@@ -20,24 +21,24 @@
 
 ### Osnovna Upotreba
 
-#### 🏃 Home Page
+####  Home Page
 - **3D Model** - Interaktivni prikaz čovjeka. Kliknite na mišić da vidite detaljne informacije
 - **BMI Calculator** - Izračunajte vašu BMI vrijednost unošenjem visine i težine
 - **Water Intake** - Unesite koliko ste vode popili dnevno (litre)
 - **Search** - Pretražujte mišiće po imenu
 - **Health Tips** - Kliknite na zvonac za nasumične zdravstvene savjete
 
-#### 📊 Stats Page
+####  Stats Page
 - Pregledajte koliko ste vremena proveli u aplikaciji
 - Vidite historiju unosa vode
 - Pratite najčešće pretraživane mišiće
 
-#### 👤 Profile Page
+####  Profile Page
 - Ažurirajte vašu profilnu sliku
 - Promijenite informacije (ime, email, bio)
 - Kliknite "Save" da sačuvate promjene
 
-### 💡 Savjeti za Korištenje
+###  Savjeti za Korištenje
 
 ✅ **Pij redovito vodu** - Unesi dnevno koliko vode piješ za tracking
 ✅ **Provjeri sve mišiće** - Koristi 3D model da naučiš gdje se nalazi svaki mišić
@@ -48,7 +49,7 @@
 
 Kliknite na sunce (☀️) u gornjem lijevom kutu za promjenu između dark i light moda.
 
-## 📋 Mišići u Bazi Podataka
+##  Mišići u Bazi Podataka
 
 Aplikacija ima informacije o 9 glavnih mišića:
 - 💪 Biceps Brachii
@@ -61,41 +62,20 @@ Aplikacija ima informacije o 9 glavnih mišića:
 - 🦵 Gastrocnemius (list)
 - 🫀 Rectus Abdominis (trbušnjaci)
 
-## 🎥 Vježbe sa GIF-ovima
+##  Vježbe sa GIF-ovima
 
 Svaki mišić ima detaljne GIF animacije koja pokazuje kako izvršiti vježbe:
 - Pravilnu tehniku
-- Pokrety
+- Pokret
 - Aktivaciju mišića
 
-## 🔐 Privatnost i Sigurnost
+##  Privatnost i Sigurnost
 
 - Vaš račun je zaštićen lozinkom
 - Svi podaci se čuvaju na vašem telefonu
-- Nikad nismo dijelimo vašu ličnu informaciju
+- Lozinka je hashovana
 
-## ❓ Često Postavljana Pitanja (FAQ)
 
-**P: Kako mogu resetovati moj račun?**
-A: Trebate da obrišete aplikaciju i ponovo je instalirate (svi podaci će biti obrisani).
-
-**P: Što ako 3D model ne učita?**
-A: Aplikacija će automatski prebaciti na BMI kalkulator. Pokušajte ponovo ili proverite konekciju.
-
-**P: Gdje se čuvaju moji podaci?**
-A: Svi podaci se čuvaju lokalno na vašem telefonu u bazi podataka.
-
-**P: Mogu li vidjeti moj napredak?**
-A: Da! Idite na Stats stranicu da vidite vrijeme provedeno i historiju vode.
-
-## 📞 Podrška
-
-Imali ste problema? Kontaktirajte nas ili pokušajte:
-1. Obrisati cache aplikacije
-2. Ponovno pokrenuti aplikaciju
-3. Ažurirati na najnoviju verziju
-
-## 📚 Verzija
 
 **Navedena verzija**: 1.0
 **Zadnja ažuriranja**: Maj 2026
